@@ -4,16 +4,16 @@ import { AiOutlineSearch } from "react-icons/ai";
 //by transitive rule, also be the synonym for “A”.
 const words = [
   { word: "mie", synonyms: ["peri", "kapi", "wash"] }, // A
-  { word: "banja", synonyms: ["tusira", "mie", "pliva"] }, // B */
-  { word: "wash", synonyms: ["clean", "banja", "peri"] }, // C
+  { word: "banja", synonyms: ["tusira", "mie", "pliva"] }, // B
+  { word: "wash", synonyms: ["clean", "banja", "peri"] },
   { word: "elena", synonyms: ["andrej", "angela", "damjan"] },
   { word: "happy", synonyms: ["joyful", "content", "glad", "cheerful"] },
   {
     word: "glad",
     synonyms: ["pleased", "delighted", "overjoyed", "well pleased"],
   },
-  { word: "sad", synonyms: ["unhappy", "melancholy", "gloomy", "depressed"] },
-  { word: "big", synonyms: ["large", "huge", "enormous", "gigantic"] },
+  /*   { word: "sad", synonyms: ["unhappy", "melancholy", "gloomy", "depressed"] },
+  { word: "big", synonyms: ["large", "huge", "enormous", "gigantic"] }, */
 ];
 
 // Ako kapi(B) e sinonim so mie(A) i  banja(C) e synonym na kapi(B) togas i banja (C e synonym so mie(A))
@@ -42,6 +42,8 @@ function findSynonyms(words, synonym) {
       return [el.word, ...el.synonyms];
     })
     .flat();
+  console.log(allDirectSynonyms);
+
   /*   console.log(allDirectSynonyms); */
   // 4. Remove the duplicates
   const firstHandSynonyms = [...new Set(allDirectSynonyms)];
