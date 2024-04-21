@@ -1,39 +1,88 @@
 import React, { useState } from "react";
 import { AiOutlineSearch } from "react-icons/ai";
-
+//Transitive rule implementation, i.e. if “B” is a synonym to “A” and “C” a synonym to “B”, then “C” should automatically,
+//by transitive rule, also be the synonym for “A”.
 const words = [
-  { word: "mie", synonyms: ["peri", "kapi"] },
-  { word: "kapi", synonyms: ["tusira", "banja", "mie"] },
-  { word: "wash", synonyms: ["clean", "banja", "mie"] },
+  { word: "mie", synonyms: ["peri", "kapi", "wash"] }, // A
+  { word: "banja", synonyms: ["tusira", "mie", "pliva"] }, // B */
+  { word: "wash", synonyms: ["clean", "banja", "peri"] }, // C
+  { word: "elena", synonyms: ["andrej", "angela", "damjan"] },
+  { word: "happy", synonyms: ["joyful", "content", "glad", "cheerful"] },
+  {
+    word: "glad",
+    synonyms: ["pleased", "delighted", "overjoyed", "well pleased"],
+  },
+  { word: "sad", synonyms: ["unhappy", "melancholy", "gloomy", "depressed"] },
+  { word: "big", synonyms: ["large", "huge", "enormous", "gigantic"] },
 ];
 
 // Ako kapi(B) e sinonim so mie(A) i  banja(C) e synonym na kapi(B) togas i banja (C e synonym so mie(A))
-// result ----> mie =[peri, kapi, banja, tusira ]
+// result ----> mie =[peri, kapi, banja, tusira ]----- console. ['peri', 'kapi', 'tusira', 'banja', 'wash', 'clean']
 // Opposite direction
 // Ako baram i za peri = [mie, kapi, banja, tusira]
+// ZA BANJA ['kapi', 'tusira', 'mie', 'wash', 'clean']
+/* ------------------------------------------------------------------------------- */
+function findSynonyms(words, synonym) {
+  // 1.  Check if any occurrence of the element exist. Check if the word exist by itself or it exist as a synonym
+  const allInstances = words?.filter((el) => {
+    if (el.word == synonym || el.synonyms.includes(synonym)) {
+      return el;
+    }
+  });
 
-// 1. First to find the word
+  console.log("All instances", allInstances);
+  // 2. If no instance exist return
+  if (allInstances.length === 0) {
+    return console.log("No word found in our dictionary!");
+  }
 
-function findSynonyms(words) {
-  const synonym = "kapi";
-  let arr = [];
-  // Check if el exist
-  const word = words?.filter(
-    (el) => el.word == synonym || el.synonyms.includes("kapi")
-  );
-  /*   if (word) {
-    arr = [...arr, word.synonyms];
-  } */
-
-  console.log(word);
-  // Find the synonyms
-  words.forEach((el) => {});
-
-  //
-
-  return arr;
+  // 3. if yes return arr with all occurrence and flattered the arr
+  const allDirectSynonyms = allInstances
+    .map((el) => {
+      return [el.word, ...el.synonyms];
+    })
+    .flat();
+  /*   console.log(allDirectSynonyms); */
+  // 4. Remove the duplicates
+  const firstHandSynonyms = [...new Set(allDirectSynonyms)];
+  console.log("Result 1", firstHandSynonyms); // ['mie', 'peri', 'kapi', 'clean', 'banja']
+  // 5. Implement transitive rule
+  const final = [
+    ...new Set(
+      words
+        ?.filter((el) => {
+          if (firstHandSynonyms.includes(el.word)) {
+            return el;
+          }
+        })
+        .map((el) => {
+          return [el.word, ...el.synonyms];
+        })
+        .flat()
+    ),
+  ].filter((el) => el !== synonym); // remove the searching word itself
+  console.log("Result 2", final); //  ['mie', 'peri', 'kapi', 'banja', 'tusira', 'pliva', 'clean']
+  return final;
 }
-findSynonyms(words);
+
+findSynonyms(words, "peri");
+/* const firstHandSynonyms = findSynonyms(words, "wash");
+console.log("Result 1", firstHandSynonyms); ['mie', 'peri', 'kapi', 'clean', 'banja']
+const secondHandSynonyms = [
+  ...new Set(firstHandSynonyms.map((el) => findSynonyms(words, el)).flat()),
+];
+console.log("Result 2", secondHandSynonyms);  [
+  "peri",
+  "kapi",
+  "wash",
+  "banja",
+  "tusira",
+  "pliva",
+  "mie",
+  "clean",
+];*/
+
+/* findSynonyms(words, "wash"); */
 
 const SearchBar = () => {
   const [activeSearch, setActiveSearch] = useState([]);
