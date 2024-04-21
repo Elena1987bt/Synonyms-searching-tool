@@ -1,7 +1,40 @@
 import React, { useState } from "react";
 import { AiOutlineSearch } from "react-icons/ai";
 
-const words = ["damjan", "angela", "elena"];
+const words = [
+  { word: "mie", synonyms: ["peri", "kapi"] },
+  { word: "kapi", synonyms: ["tusira", "banja", "mie"] },
+  { word: "wash", synonyms: ["clean", "banja", "mie"] },
+];
+
+// Ako kapi(B) e sinonim so mie(A) i  banja(C) e synonym na kapi(B) togas i banja (C e synonym so mie(A))
+// result ----> mie =[peri, kapi, banja, tusira ]
+// Opposite direction
+// Ako baram i za peri = [mie, kapi, banja, tusira]
+
+// 1. First to find the word
+
+function findSynonyms(words) {
+  const synonym = "kapi";
+  let arr = [];
+  // Check if el exist
+  const word = words?.filter(
+    (el) => el.word == synonym || el.synonyms.includes("kapi")
+  );
+  /*   if (word) {
+    arr = [...arr, word.synonyms];
+  } */
+
+  console.log(word);
+  // Find the synonyms
+  words.forEach((el) => {});
+
+  //
+
+  return arr;
+}
+findSynonyms(words);
+
 const SearchBar = () => {
   const [activeSearch, setActiveSearch] = useState([]);
 
@@ -20,6 +53,7 @@ const SearchBar = () => {
       <div className="relative">
         <input
           type="search"
+          autoFocus
           placeholder="Type Here..."
           className="w-full p-4 rounded-full bg-white-800"
           onChange={(e) => handleSearch(e)}

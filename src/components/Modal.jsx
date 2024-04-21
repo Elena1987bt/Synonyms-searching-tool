@@ -22,7 +22,7 @@ const Modal = ({ open, onClose }) => {
       >
         <button
           onClick={onClose}
-          className="absolute text-xl  top-4 right-4 p-1 rounded-lg text-black bg-white hover:bg-gray-50 hover:text-gray-600"
+          className="absolute text-xl  top-4 right-4 p-1 rounded-lg text-black bg-white hover:bg-gray-200 hover:text-gray-600"
         >
           <IoMdClose />
         </button>

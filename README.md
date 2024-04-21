@@ -1,70 +1,20 @@
-# Getting Started with Create React App
+Problem description
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Implement a system that works as a synonyms search tool with the following requirements
+The user should be able to add new words with synonyms.
+The user should be able to ask for synonyms for a word and lookup should work in both directions. For example, If “wash” is a synonym to “clean”, then I should be able to look up both words and get the respective synonyms.
+A word may have multiple synonyms and all should be returned at a user request.
+Make the solution with simple, but fast, data structures in the backend’s memory - no persistence needed.
+Implement the solution in the best possible way, as if it were production code.
+Transitive rule implementation, i.e. if “B” is a synonym to “A” and “C” a synonym to “B”, then “C” should automatically, by transitive rule, also be the synonym for “A”.
+Notes
 
-## Available Scripts
-
-In the project directory, you can run:
-
-### `npm start`
-
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
-
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Please remember that the application should be production-ready with a user-friendly UX/UI.
+The system should have both backend and frontend components with the given limitations:
+Node.js for the backend (let us know if you have other preferences).
+ReactJS framework for the frontend (let us know if you have other preferences).
+Write the program in a way that you would do if you should build something for a product that should be used in production for a client.
+Think of all aspects like user-friendly, testing, readability, maintenance, memory consumption, performance, etc.
+Comment essential part of the code so we understand your reasoning.
+Upload the source code to a public repository (e.g. GitHub).
+Deployed so we can test the solution online.

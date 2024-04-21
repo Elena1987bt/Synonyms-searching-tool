@@ -1,23 +1,32 @@
-import { useState, useRef } from "react";
-import TagField from "./TagField";
+import { useState, useRef, useEffect } from "react";
+import SynonymField from "./SynonymField";
 
 const Form = () => {
-  const [tags, setTags] = useState([]);
+  const [synonyms, setSynonyms] = useState([]);
   const [word, setWord] = useState("");
+  // track the use input for synonyms
+  const [userInput, setUserInput] = useState("");
   const [error, setError] = useState("");
   const inputRef = useRef(null);
   const inputRefTwo = useRef(null);
   // Handle input onChange
   const handleWordChange = (e) => {
     setWord(e.target.value);
+    /*     if (word.trim().length === 1) {
+      setUserInput("");
+    } */
   };
-  //define the MaxTags
-  const MAX_TAGS = 10;
+  //define the Maxsynonyms
+  const MAX_SYNONYMS = 10;
 
   // Function to handle adding the tag to the array
   const handleAddTag = (newTag) => {
-    if (newTag && !tags.includes(newTag) && tags.length < MAX_TAGS) {
-      setTags([...tags, newTag]);
+    if (
+      newTag &&
+      !synonyms.includes(newTag) &&
+      synonyms.length < MAX_SYNONYMS
+    ) {
+      setSynonyms([...synonyms, newTag]);
     }
   };
   // handle word input Enter key press
@@ -28,14 +37,15 @@ const Form = () => {
     }
   };
   // Function to remove tag from array
-  const handleRemoveTag = (tag) => {
-    setTags((prevTags) => prevTags.filter((t) => t !== tag));
-    if (tags.length === 1) {
-      setWord("");
+  const handleRemoveTag = (synonym) => {
+    setSynonyms((prevSynonyms) => prevSynonyms.filter((t) => t !== synonym));
+    if (synonyms.length === 1) {
+      /*  setWord(""); */
+
       inputRef.current.focus();
     }
   };
-  console.log(word);
+
   // Handle form submission
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -43,16 +53,25 @@ const Form = () => {
     if (word.length === 0) {
       setError("Word field must not be empty!");
     }
-    if (tags.length === 0) {
+    if (synonyms.length === 0) {
       setError("Word must have at least one synonym!");
     }
-    if (word.length === 0 && tags.length === 0) {
+    if (word.length === 0 && synonyms.length === 0) {
       setError((prev) => "You must fill all the fields!");
     }
 
     console.log("Run to backend");
+    /*   setWord("");
+    setSynonyms([]); */
   };
-  console.log(error);
+  // SetTimeout to remove err message
+  useEffect(() => {
+    const timeoutId = setTimeout(() => {
+      setError("");
+    }, 2000);
+
+    return () => clearTimeout(timeoutId);
+  }, [error]);
   return (
     <form className="flex flex-col w-[300px] md:w-[400px]">
       <input
@@ -66,13 +85,15 @@ const Form = () => {
         value={word}
         ref={inputRef}
       />
-      <TagField
-        tags={tags}
+      <SynonymField
+        synonyms={synonyms}
         addTag={handleAddTag}
         removeTag={handleRemoveTag}
-        maxTags={MAX_TAGS}
+        maxSynonyms={MAX_SYNONYMS}
         inputRefTwo={inputRefTwo}
         word={word}
+        userInput={userInput}
+        setUserInput={setUserInput}
       />
 
       <button

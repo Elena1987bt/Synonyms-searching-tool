@@ -3,9 +3,9 @@ import { NavLink } from "react-router-dom";
 
 const Navbar = () => {
   return (
-    <nav className="bg-transparent ">
+    <nav className="bg-transparent">
       <div className="max-w-screen-xl flex flex-wrap items-center justify-end mx-auto p-6">
-        <div className=" w-full w-auto">
+        <div className="  w-auto">
           <ul className="font-medium flex flex-row md:space-x-8 bg-transparent">
             <li>
               <NavLink
