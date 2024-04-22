@@ -3,9 +3,11 @@ import LandingPage from "../components/LandingPage";
 import List from "../components/List";
 const Dictionary = () => {
   return (
-    <LandingPage>
-      <List />
-    </LandingPage>
+    <div className="h-auto">
+      <LandingPage>
+        <List />
+      </LandingPage>
+    </div>
   );
 };
 
