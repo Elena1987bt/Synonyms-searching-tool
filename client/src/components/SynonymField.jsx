@@ -35,7 +35,7 @@ const SynonymField = ({
   };
 
   return (
-    <div className="flex flex-col w-[300px] md:w-[400px] my-4">
+    <div className="flex flex-col w-full md:w-[400px] my-4">
       <div className="flex rounded-md ">
         <input
           name="keyword_synonyms"

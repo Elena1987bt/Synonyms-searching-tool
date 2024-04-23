@@ -1,12 +1,12 @@
 import React from "react";
-import LandingPage from "../components/LandingPage";
+import Container from "../components/Container";
 import List from "../components/List";
 const Dictionary = () => {
   return (
     <div className="h-auto">
-      <LandingPage>
+      <Container>
         <List />
-      </LandingPage>
+      </Container>
     </div>
   );
 };

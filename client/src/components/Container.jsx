@@ -1,8 +1,8 @@
 import React from "react";
 import bg from "../assets/book_1.avif";
-import Navbar from "../components/Navbar";
+import Navbar from "./Navbar";
 
-const LandingPage = ({ children }) => {
+const Container = ({ children }) => {
   const backgroundImageStyle = {
     backgroundImage: `url("${bg}")`,
   };
@@ -17,4 +17,4 @@ const LandingPage = ({ children }) => {
   );
 };
 
-export default LandingPage;
+export default Container;

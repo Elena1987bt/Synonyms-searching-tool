@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import SynonymField from "./SynonymField";
+import Loader from "./Loader";
 
 const Form = () => {
   const [synonyms, setSynonyms] = useState([]);
@@ -9,18 +10,18 @@ const Form = () => {
   const [error, setError] = useState("");
   const inputRef = useRef(null);
   const inputRefTwo = useRef(null);
+  const [loading, setLoading] = useState(false);
+  const [success, setSuccess] = useState("");
+
   // Handle input onChange
   const handleWordChange = (e) => {
     setWord(e.target.value);
-    /*     if (word.trim().length === 1) {
-      setUserInput("");
-    } */
   };
-  //define the Maxsynonyms
+  //define the MaxSynonyms
   const MAX_SYNONYMS = 10;
 
   // Function to handle adding the tag to the array
-  const handleAddTag = (newTag) => {
+  const handleAddSynonym = (newTag) => {
     if (
       newTag &&
       !synonyms.includes(newTag) &&
@@ -37,43 +38,71 @@ const Form = () => {
     }
   };
   // Function to remove tag from array
-  const handleRemoveTag = (synonym) => {
+  const handleRemoveSynonym = (synonym) => {
     setSynonyms((prevSynonyms) => prevSynonyms.filter((t) => t !== synonym));
     if (synonyms.length === 1) {
-      /*  setWord(""); */
-
       inputRef.current.focus();
     }
   };
 
   // Handle form submission
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-
     if (word.length === 0) {
       setError("Word field must not be empty!");
+      return;
     }
     if (synonyms.length === 0) {
       setError("Word must have at least one synonym!");
+      return;
     }
     if (word.length === 0 && synonyms.length === 0) {
       setError((prev) => "You must fill all the fields!");
+      return;
     }
-
     console.log("Run to backend");
-    /*   setWord("");
-    setSynonyms([]); */
+    setLoading(true);
+    try {
+      const response = await fetch(`http://localhost:8000/words`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ word: word, synonyms: synonyms }),
+      });
+      if (!response.ok) {
+        throw new Error(`HTTP error: Status ${response.status}`);
+      }
+      let res = await response.json();
+      setSuccess(true);
+      console.log(res?.message);
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setLoading(false);
+      setWord("");
+      setSynonyms([]);
+      setUserInput("");
+    }
   };
   // SetTimeout to remove err message
   useEffect(() => {
     const timeoutId = setTimeout(() => {
       setError("");
-    }, 2000);
+    }, 3000);
 
     return () => clearTimeout(timeoutId);
   }, [error]);
+  // SetTimeout to remove success message
+  useEffect(() => {
+    const timeoutId = setTimeout(() => {
+      setSuccess(false);
+    }, 3000);
+
+    return () => clearTimeout(timeoutId);
+  }, [success]);
   return (
-    <form className="flex flex-col w-[300px] md:w-[400px]">
+    <form className="flex flex-col w-full md:w-[400px]">
       <input
         autoFocus
         name="word"
@@ -87,8 +116,8 @@ const Form = () => {
       />
       <SynonymField
         synonyms={synonyms}
-        addTag={handleAddTag}
-        removeTag={handleRemoveTag}
+        addTag={handleAddSynonym}
+        removeTag={handleRemoveSynonym}
         maxSynonyms={MAX_SYNONYMS}
         inputRefTwo={inputRefTwo}
         word={word}
@@ -97,12 +126,23 @@ const Form = () => {
       />
 
       <button
-        onClick={handleSubmit}
+        onClick={(e) => handleSubmit(e)}
         className="bg-blue-800 text-white p-3 rounded outline-none border-none transform transition duration-300  hover:bg-blue-600 "
       >
         Submit
       </button>
+      {success && (
+        <h1
+          className="my-10  text-center   tracking-tight leading-2 text-green-900 text-md lg:text-xl
+        "
+        >
+          Success!
+          <br />
+          <p className="mt-2 text-3xl">👏👏👏</p>
+        </h1>
+      )}
       {error && <p className="text-red-200 mt-10">* {error}</p>}
+      {loading && <Loader />}
     </form>
   );
 };

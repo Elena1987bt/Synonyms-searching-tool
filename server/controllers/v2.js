@@ -41,14 +41,14 @@ const trie = new Trie();
 words.forEach((el) => {
   trie.insert(el.word, el.synonyms);
 });
-function findSynonyms(words, wordToSearch) {
+function findSynonyms(words, searchTerm) {
   /* 1. Get all direct synonyms */
-  const synonyms = trie.searchSynonyms(wordToSearch);
+  const synonyms = trie.searchSynonyms(searchTerm);
 
   /* 2. Get all related synonyms - Implement transitive rule */
   let allRelatedSynonyms = synonyms;
   if (synonyms) {
-    console.log(`Synonyms of '${wordToSearch}': ${synonyms.join(", ")}`);
+    console.log(`Synonyms of '${searchTerm}': ${synonyms.join(", ")}`);
     synonyms.forEach((el) => {
       allRelatedSynonyms.push(trie.searchSynonyms(el));
     });
@@ -59,7 +59,7 @@ function findSynonyms(words, wordToSearch) {
     ];
     return result;
   } else {
-    console.log(`No synonyms found for '${wordToSearch}'`);
+    console.log(`No synonyms found for '${searchTerm}'`);
   }
 }
 

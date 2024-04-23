@@ -1,8 +1,8 @@
 /* Get All Synonyms */
-function findSynonyms(words, synonym) {
+function findSynonyms(words, searchTerm) {
   // 1.  Check if any occurrence of the element exist. Check if the word exist by itself or it exist as a synonym
   const allInstances = words?.filter((el) => {
-    if (el.word == synonym || el.synonyms.includes(synonym)) {
+    if (el.word == searchTerm || el.synonyms.includes(searchTerm)) {
       return el;
     }
   });
@@ -11,7 +11,7 @@ function findSynonyms(words, synonym) {
   // 2. If no instance exist return
   if (allInstances.length === 0) {
     console.log("No word found in our dictionary!");
-    return { word: synonym, synonyms: [] };
+    return { word: searchTerm, synonyms: [] };
   }
 
   // 3. if yes return arr with all occurrence flattered the arr and remove the duplicated
@@ -40,9 +40,13 @@ function findSynonyms(words, synonym) {
         })
         .flat()
     ),
-  ].filter((el) => el !== synonym); // remove the searching word itself
+  ].filter((el) => el !== searchTerm); // remove the searching word itself
   console.log("Result 2", result); //  ['mie', 'peri', 'kapi', 'banja', 'tusira', 'pliva', 'clean']
-  return { word: synonym, synonyms: result };
+  return {
+    word: searchTerm,
+    synonyms: result,
+    strongestMatches: allDirectSynonyms,
+  };
 }
 
 /* Add a word to a dictionary */

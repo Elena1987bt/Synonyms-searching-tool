@@ -5,7 +5,7 @@ const SearchBar = ({ onSubmit, activeSearch, setActiveSearch, setShow }) => {
   const handleSearch = (e) => {
     if (e.target.value == "") {
       setActiveSearch("");
-      setShow(false);
+      /*     setShow(false); */
       return false;
     }
     setActiveSearch(e.target.value.trim());
