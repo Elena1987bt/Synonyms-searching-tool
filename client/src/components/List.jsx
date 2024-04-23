@@ -13,6 +13,7 @@ const List = () => {
           throw new Error(`HTTP error: Status ${response.status}`);
         }
         let res = await response.json();
+
         setData(res.result);
         setError(null);
       } catch (err) {
@@ -31,8 +32,8 @@ const List = () => {
         Full content
       </h1>
 
-      <div className="flex flex-wrap  ">
-        {data.map((el, i) => (
+      <div className="flex flex-wrap ">
+        {data?.map((el, i) => (
           <Card el={el} key={i} />
         ))}
       </div>

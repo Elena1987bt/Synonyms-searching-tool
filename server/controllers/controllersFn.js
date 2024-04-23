@@ -11,7 +11,7 @@ function findSynonyms(words, synonym) {
   // 2. If no instance exist return
   if (allInstances.length === 0) {
     console.log("No word found in our dictionary!");
-    return allInstances;
+    return { word: synonym, synonyms: [] };
   }
 
   // 3. if yes return arr with all occurrence flattered the arr and remove the duplicated
@@ -42,7 +42,7 @@ function findSynonyms(words, synonym) {
     ),
   ].filter((el) => el !== synonym); // remove the searching word itself
   console.log("Result 2", result); //  ['mie', 'peri', 'kapi', 'banja', 'tusira', 'pliva', 'clean']
-  return result;
+  return { word: synonym, synonyms: result };
 }
 
 /* Add a word to a dictionary */

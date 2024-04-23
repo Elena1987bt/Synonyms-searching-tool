@@ -5,8 +5,8 @@ const {
   addNewWord,
   getAllWords,
 } = require("./controllers/controllersFn.js");
-const { words } = require("./data.js");
-
+/* const { words } = require("./data.js"); */
+const { words } = require("./testingData.js");
 const app = express();
 
 app.use(cors());
@@ -26,10 +26,10 @@ app.get("/words/search", async (req, res) => {
   const searchTerm = req.query.word;
   console.log(searchTerm);
   const result = await findSynonyms(words, searchTerm);
-  if (result.length == 0) {
+  if (result.synonyms.length == 0) {
     return res.json({
       statusCode: 200,
-      result: result,
+      result: result.synonyms,
       message: "Success!",
     });
   }

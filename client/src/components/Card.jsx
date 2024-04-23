@@ -1,6 +1,7 @@
 import React from "react";
 
 const Card = ({ el }) => {
+  console.log(el);
   return (
     <div
       className="w-full

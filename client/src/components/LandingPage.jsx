@@ -9,7 +9,7 @@ const LandingPage = ({ children }) => {
   return (
     <section
       style={backgroundImageStyle}
-      className="relative bg-center h-screen bg-no-repeat bg-gray-700 bg-blend-multiply"
+      className=" bg-center min-h-screen  h-auto bg-fixed bg-gray-700 bg-blend-multiply"
     >
       <Navbar />
       {children}
