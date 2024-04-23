@@ -141,7 +141,7 @@ const Form = () => {
         </h1>
       )}
       {error && <p className="text-red-200 mt-10">* {error}</p>}
-      {loading && <Loader />}.
+      {loading && <Loader />}
     </form>
   );
 };
