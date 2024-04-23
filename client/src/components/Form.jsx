@@ -124,7 +124,6 @@ const Form = () => {
         userInput={userInput}
         setUserInput={setUserInput}
       />
-
       <button
         onClick={(e) => handleSubmit(e)}
         className="bg-blue-800 text-white p-3 rounded outline-none border-none transform transition duration-300  hover:bg-blue-600 "
@@ -142,7 +141,7 @@ const Form = () => {
         </h1>
       )}
       {error && <p className="text-red-200 mt-10">* {error}</p>}
-      {loading && <Loader />}
+      {loading && <Loader />}.
     </form>
   );
 };
