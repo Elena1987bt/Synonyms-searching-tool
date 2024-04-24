@@ -4,11 +4,11 @@ const List = () => {
   const [loading, setLoading] = useState("");
   const [data, setData] = useState([]);
   const [error, setError] = useState("");
-
+  const URL = process.env.REACT_APP_URL;
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch(`http://localhost:8000/words`);
+        const response = await fetch(`${URL}/words`);
         if (!response.ok) {
           throw new Error(`HTTP error: Status ${response.status}`);
         }

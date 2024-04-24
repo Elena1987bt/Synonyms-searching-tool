@@ -19,6 +19,7 @@ const Form = () => {
   };
   //define the MaxSynonyms
   const MAX_SYNONYMS = 10;
+  const URL = process.env.REACT_APP_URL;
 
   // Function to handle adding the tag to the array
   const handleAddSynonym = (newTag) => {
@@ -63,7 +64,7 @@ const Form = () => {
     console.log("Run to backend");
     setLoading(true);
     try {
-      const response = await fetch(`http://localhost:8000/words`, {
+      const response = await fetch(`${URL}/words`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

@@ -17,6 +17,8 @@ const Home = () => {
 
   const refTop = useRef(null);
   const refBottom = useRef(null);
+
+  const URL = process.env.REACT_APP_URL;
   /* Scroll to the bottom when user clicks on the search button */
   useEffect(() => {
     if (show || loading) {
@@ -24,7 +26,7 @@ const Home = () => {
     }
   }, [show, loading]);
   /* Scroll to the top when the search input is empty */
-  /*   useEffect(() => {
+  useEffect(() => {
     if (!activeSearch && data?.length == 0) {
       const timeoutId = setTimeout(() => {
         refTop?.current?.scrollIntoView({ behavior: "smooth" });
@@ -32,7 +34,7 @@ const Home = () => {
 
       return () => clearTimeout(timeoutId);
     }
-  }, [activeSearch, data]); */
+  }, [activeSearch, data]);
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!activeSearch) return;
@@ -40,9 +42,7 @@ const Home = () => {
     setLoading(true);
 
     try {
-      const response = await fetch(
-        `http://localhost:8000/words/search?word=${activeSearch}`
-      );
+      const response = await fetch(`${URL}/words/search?word=${activeSearch}`);
       if (!response.ok) {
         throw new Error(`HTTP error: Status ${response.status}`);
       }
