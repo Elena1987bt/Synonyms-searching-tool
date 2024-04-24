@@ -1,5 +1,3 @@
-const { words } = require("../data.js");
-
 class TrieNode {
   constructor() {
     this.children = {};
@@ -37,29 +35,37 @@ class Trie {
 
 /* 1. Create a new tree */
 const trie = new Trie();
-/*2. Populate the tree with the raw data */
-words.forEach((el) => {
-  trie.insert(el.word, el.synonyms);
-});
+
 function findSynonyms(words, searchTerm) {
+  /* 2. Populate the tree with the raw data in lowercase*/
+  words.forEach((el) => {
+    trie.insert(
+      el.word.toLowerCase(),
+      el.synonyms.map((el) => el?.toLowerCase())
+    );
+  });
   /* 1. Get all direct synonyms */
-  const synonyms = trie.searchSynonyms(searchTerm);
+  const synonyms = trie.searchSynonyms(searchTerm.toLowerCase());
+  console.log(synonyms);
 
   /* 2. Get all related synonyms - Implement transitive rule */
   let allRelatedSynonyms = synonyms;
   if (synonyms) {
-    console.log(`Synonyms of '${searchTerm}': ${synonyms.join(", ")}`);
     synonyms.forEach((el) => {
       allRelatedSynonyms.push(trie.searchSynonyms(el));
     });
-    console.log(allRelatedSynonyms);
-    /* 3. Flatter array, remove null values and duplicates */
+
+    /* 3. Flatten the array, remove null values and duplicates */
     const result = [
       ...new Set(allRelatedSynonyms.filter((el) => el !== null).flat()),
     ];
-    return result;
+    return {
+      word: searchTerm,
+      synonyms: result,
+    };
   } else {
     console.log(`No synonyms found for '${searchTerm}'`);
+    return { word: searchTerm, synonyms: [] };
   }
 }
 

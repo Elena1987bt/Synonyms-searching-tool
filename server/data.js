@@ -3,7 +3,7 @@ words = [
   { word: "banja", synonyms: ["tusira", "mie", "pliva"] }, // B
   { word: "wash", synonyms: ["clean", "banja", "peri"] },
   { word: "elena", synonyms: ["andrej", "angela", "damjan"] },
-  {
+  /*   {
     word: "happy",
     synonyms: [
       "cheerful",
@@ -75,7 +75,6 @@ words = [
       "rinse (out)",
       "dry-clean",
       "shampoo",
-      z,
     ],
   },
   {
@@ -111,6 +110,6 @@ words = [
       "      dry",
       "      polish",
     ],
-  },
+  }, */
 ];
 module.exports = { words };

@@ -1,12 +1,11 @@
 import React, { useState } from "react";
 import { AiOutlineSearch } from "react-icons/ai";
 
-const SearchBar = ({ onSubmit, activeSearch, setActiveSearch, setShow }) => {
+const SearchBar = ({ onSubmit, activeSearch, setActiveSearch, setData }) => {
   const handleSearch = (e) => {
     if (e.target.value == "") {
       setActiveSearch("");
-      /*     setShow(false); */
-      return false;
+      setData([]);
     }
     setActiveSearch(e.target.value.trim());
   };

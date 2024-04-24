@@ -17,16 +17,26 @@ const Home = () => {
 
   const refTop = useRef(null);
   const refBottom = useRef(null);
+  /* Scroll to the bottom when user clicks on the search button */
   useEffect(() => {
     if (show || loading) {
       refBottom?.current?.scrollIntoView({ behavior: "smooth" });
     }
   }, [show, loading]);
+  /* Scroll to the top when the search input is empty */
+  /*   useEffect(() => {
+    if (!activeSearch && data?.length == 0) {
+      const timeoutId = setTimeout(() => {
+        refTop?.current?.scrollIntoView({ behavior: "smooth" });
+      }, 1000);
+
+      return () => clearTimeout(timeoutId);
+    }
+  }, [activeSearch, data]); */
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!activeSearch) return;
     setShow(true);
-
     setLoading(true);
 
     try {
@@ -60,6 +70,7 @@ const Home = () => {
             setActiveSearch={setActiveSearch}
             onSubmit={handleSubmit}
             setShow={setShow}
+            setData={setData}
           />
         </div>
 
