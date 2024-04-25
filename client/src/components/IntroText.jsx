@@ -4,10 +4,10 @@ import { useState } from "react";
 const IntroText = ({ setOpenModal }) => {
   return (
     <>
-      <h1 className="mb-6 capitalize font-extrabold tracking-tight leading-none text-white text-4xl lg:text-6xl">
+      <h1 className="mb-6 capitalize font-extrabold tracking-tight leading-10 text-white text-4xl lg:text-6xl">
         Synonyms search tool
       </h1>
-      <p className="mt-20 md:mt-0 mb-10 text-md font-normal text-gray-300 lg:text-xl sm:px-16 lg:px-48">
+      <p className="mt-20 md:mt-0 mb-10 text-md font-normal text-gray-300 leading lg:text-xl sm:px-16 lg:px-48">
         🌟 Start searching synonyms for words from our dictionary or{" "}
         <button
           onClick={() => setOpenModal(true)}

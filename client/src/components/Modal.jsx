@@ -27,7 +27,7 @@ const Modal = ({ open, onClose }) => {
           <IoMdClose />
         </button>
         <div className="flex flex-col items-center w-56 mx-auto py-10">
-          <h1 className="my-10 w-[400px] text-center capitalize font-extrabold tracking-tight leading-4 text-gray-900 text-xl lg:text-3xl">
+          <h1 className="my-10 w-[400px] text-center capitalize font-extrabold tracking-tight leading-7 text-gray-900 text-xl lg:text-3xl">
             🌟 Add a word 🌟 <br /> to our dictionary
           </h1>
           <Form />
